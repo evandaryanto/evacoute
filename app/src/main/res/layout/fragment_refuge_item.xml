@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/refuge_item_location"
             android:text="021-7330425"
-            android:id="@+id/refuge_item_phone"/>
+            android:id="@+id/refuge_item_contact"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"

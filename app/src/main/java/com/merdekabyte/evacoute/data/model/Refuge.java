@@ -13,18 +13,22 @@ public class Refuge extends ParseModel {
     protected String description;
     protected Double geoLatitude;
     protected Double geoLongitude;
-    protected String locationText;
+    protected String location;
+    protected String locationDetail;
+    protected String contact;
 
     // Constructors
 
     public Refuge(String objectId, String name, String description, Double geoLatitude,
-                  Double geoLongitude, String locationText, Date createdAt, Date updatedAt) {
+                  Double geoLongitude, String location, String locationDetail, String contact, Date createdAt, Date updatedAt) {
         super(objectId, createdAt, updatedAt);
         this.name = name;
         this.description = description;
         this.geoLatitude = geoLatitude;
         this.geoLongitude = geoLongitude;
-        this.locationText = locationText;
+        this.location = location;
+        this.locationDetail = locationDetail;
+        this.contact = contact;
     }
 
     public Refuge(ParseObject parseObject) {
@@ -33,7 +37,9 @@ public class Refuge extends ParseModel {
         this.description = parseObject.getString("description");
         this.geoLatitude = parseObject.getDouble("geoLatitude");
         this.geoLongitude = parseObject.getDouble("geoLongitude");
-        this.locationText = parseObject.getString("locationText");
+        this.location = parseObject.getString("location");
+        this.locationDetail = parseObject.getString("locationDetail");
+        this.contact = parseObject.getString("contact");
     }
 
     // getters and setters
@@ -70,12 +76,28 @@ public class Refuge extends ParseModel {
         this.geoLongitude = geoLongitude;
     }
 
-    public String getLocationText() {
-        return locationText;
+    public String getContact() {
+        return contact;
     }
 
-    public void setLocationText(String locationText) {
-        this.locationText = locationText;
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocationDetail() {
+        return locationDetail;
+    }
+
+    public void setLocationDetail(String locationDetail) {
+        this.locationDetail = locationDetail;
     }
 
     // toJson
@@ -85,5 +107,5 @@ public class Refuge extends ParseModel {
         return ow.writeValueAsString(this);
     }
 
-    public static Refuge defaultObject = new Refuge("", "", "", 0.0, 0.0, "", new Date(), new Date());
+    public static Refuge defaultObject = new Refuge("", "", "", 0.0, 0.0, "", "", "", new Date(), new Date());
 }

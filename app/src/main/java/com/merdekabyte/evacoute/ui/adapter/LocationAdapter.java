@@ -26,12 +26,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         // set the view's size, margins, paddings and layout parameters
-        public TextView id, amount, description, status, time;
+        public TextView name, location, contact;
         public ImageView icon;
 
         public ViewHolder(View v) {
             super(v);
-            //id = (TextView) v.findViewById(R.id.history_item_id);
+            name = (TextView) v.findViewById(R.id.refuge_item_name);
+            location = (TextView) v.findViewById(R.id.refuge_item_location);
+            contact = (TextView) v.findViewById(R.id.refuge_item_contact);
         }
     }
 
@@ -53,8 +55,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+        Refuge refuge = mDataset.get(position);
+
+        holder.name.setText(refuge.getName());
+        holder.location.setText(refuge.getLocation());
+        holder.contact.setText(refuge.getContact());
 
     }
 
