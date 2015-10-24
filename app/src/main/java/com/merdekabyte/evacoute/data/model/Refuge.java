@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.parse.ParseObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 public class Refuge extends ParseModel {
@@ -17,10 +19,13 @@ public class Refuge extends ParseModel {
     protected String locationDetail;
     protected String contact;
 
+    private String imageBucket = "http://evacoute.s3-ap-southeast-1.amazonaws.com/";
+
     // Constructors
 
     public Refuge(String objectId, String name, String description, Double geoLatitude,
-                  Double geoLongitude, String location, String locationDetail, String contact, Date createdAt, Date updatedAt) {
+                  Double geoLongitude, String location, String locationDetail, String contact,
+                  Date createdAt, Date updatedAt) {
         super(objectId, createdAt, updatedAt);
         this.name = name;
         this.description = description;
@@ -98,6 +103,10 @@ public class Refuge extends ParseModel {
 
     public void setLocationDetail(String locationDetail) {
         this.locationDetail = locationDetail;
+    }
+
+    public String getImageUrl() {
+        return this.imageBucket + this.objectId + ".jpg";
     }
 
     // toJson

@@ -1,7 +1,11 @@
 package com.merdekabyte.evacoute.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,13 @@ import android.widget.TextView;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.data.model.Refuge;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -27,13 +38,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         // each data item is just a string in this case
         // set the view's size, margins, paddings and layout parameters
         public TextView name, location, contact;
-        public ImageView icon;
+        public ImageView image;
 
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.refuge_item_name);
             location = (TextView) v.findViewById(R.id.refuge_item_location);
             contact = (TextView) v.findViewById(R.id.refuge_item_contact);
+            image = (ImageView) v.findViewById(R.id.refuge_item_image);
         }
     }
 
@@ -57,9 +69,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Refuge refuge = mDataset.get(position);
 
-        holder.name.setText(refuge.getName());
-        holder.location.setText(refuge.getLocation());
-        holder.contact.setText(refuge.getContact());
+        try {
+            holder.name.setText(refuge.getName());
+            holder.location.setText(refuge.getLocation());
+            holder.contact.setText(refuge.getContact());
+            Bitmap image = loadBitmap(refuge.getImageUrl());
+            holder.image.setImageBitmap(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -67,5 +85,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+    public Bitmap loadBitmap(String url) throws IOException {
+        Log.d("loadBitmap", url);
+        return BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
     }
 }
