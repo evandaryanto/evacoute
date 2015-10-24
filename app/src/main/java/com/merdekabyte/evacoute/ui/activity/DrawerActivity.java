@@ -3,6 +3,9 @@ package com.merdekabyte.evacoute.ui.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.merdekabyte.evacoute.R;
+import com.merdekabyte.evacoute.ui.fragment.RefugeeFragment;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,22 +86,35 @@ public class DrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_location_all) {
+            updateFragment(new RefugeeFragment(), "Refugee");
+        } else if (id == R.id.nav_location_central) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_location_resident) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_information) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_search) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_help_me) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void updateFragment(Fragment fragment, String title) {
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            fragmentTransaction.replace(R.id.drawer_container_body, fragment);
+            fragmentTransaction.commit();
+
+            // set the toolbar title
+            getSupportActionBar().setTitle(title);
+        }
     }
 }

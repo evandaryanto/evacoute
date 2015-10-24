@@ -9,4 +9,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_drawer" tools:context="com.merdekabyte.evacoute.ui.activity.DrawerActivity">
 
+    <FrameLayout
+        android:id="@+id/drawer_container_body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
 </RelativeLayout>
