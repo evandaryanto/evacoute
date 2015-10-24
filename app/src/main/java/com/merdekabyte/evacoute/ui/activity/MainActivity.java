@@ -1,4 +1,4 @@
-package com.merdekabyte.evacoute;
+package com.merdekabyte.evacoute.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +9,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+<<<<<<< HEAD:app/src/main/java/com/merdekabyte/evacoute/MainActivity.java
 import com.parse.Parse;
+=======
+import com.merdekabyte.evacoute.R;
+>>>>>>> d672f8980e9b94b3d98ade0171f5bc5df18a8ee2:app/src/main/java/com/merdekabyte/evacoute/ui/activity/MainActivity.java
 
 public class MainActivity extends AppCompatActivity {
 
