@@ -3,24 +3,20 @@ package com.merdekabyte.evacoute.ui.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.data.model.Refuge;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
+import com.merdekabyte.evacoute.ui.activity.RefugeLocationActivity;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -39,6 +35,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         // set the view's size, margins, paddings and layout parameters
         public TextView name, location, contact;
         public ImageView image;
+        public View layout;
 
         public ViewHolder(View v) {
             super(v);
@@ -46,6 +43,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             location = (TextView) v.findViewById(R.id.refuge_item_location);
             contact = (TextView) v.findViewById(R.id.refuge_item_contact);
             image = (ImageView) v.findViewById(R.id.refuge_item_image);
+            layout = (RelativeLayout) v.findViewById(R.id.refuge_item_layout);
         }
     }
 
@@ -67,7 +65,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Refuge refuge = mDataset.get(position);
+        final Refuge refuge = mDataset.get(position);
 
         try {
             holder.name.setText(refuge.getName());
@@ -79,6 +77,17 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             e.printStackTrace();
         }
 
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, RefugeLocationActivity.class);
+                i.putExtra("Name", refuge.getName());
+                i.putExtra("Location", refuge.getLocation());
+                i.putExtra("Contact", refuge.getContact());
+                i.putExtra("ImageURL", refuge.getImageUrl());
+                mContext.startActivity(i);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -1,5 +1,7 @@
 package com.merdekabyte.evacoute.data.model;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -18,6 +20,7 @@ public class Refuge extends ParseModel {
     protected String location;
     protected String locationDetail;
     protected String contact;
+    protected String ownerObjectId;
 
     private String imageBucket = "http://evacoute.s3-ap-southeast-1.amazonaws.com/";
 
@@ -25,7 +28,7 @@ public class Refuge extends ParseModel {
 
     public Refuge(String objectId, String name, String description, Double geoLatitude,
                   Double geoLongitude, String location, String locationDetail, String contact,
-                  Date createdAt, Date updatedAt) {
+                  String ownerObjectId, Date createdAt, Date updatedAt) {
         super(objectId, createdAt, updatedAt);
         this.name = name;
         this.description = description;
@@ -34,6 +37,7 @@ public class Refuge extends ParseModel {
         this.location = location;
         this.locationDetail = locationDetail;
         this.contact = contact;
+        this.ownerObjectId = ownerObjectId;
     }
 
     public Refuge(ParseObject parseObject) {
@@ -45,7 +49,10 @@ public class Refuge extends ParseModel {
         this.location = parseObject.getString("location");
         this.locationDetail = parseObject.getString("locationDetail");
         this.contact = parseObject.getString("contact");
+        this.ownerObjectId = parseObject.getParseObject("ownerObjectId").getObjectId();
     }
+
+//    public static Refuge defaultObject = new Refuge("", "", "", 0.0, 0.0, "", "", "", "", new Date(), new Date());
 
     // getters and setters
 
@@ -105,6 +112,16 @@ public class Refuge extends ParseModel {
         this.locationDetail = locationDetail;
     }
 
+    public String getOwnerObjectId() {
+        return ownerObjectId;
+    }
+
+    public void setOwnerObjectId(String ownerObjectId) {
+        this.ownerObjectId = ownerObjectId;
+    }
+
+    // additional getter
+
     public String getImageUrl() {
         return this.imageBucket + this.objectId + ".jpg";
     }
@@ -115,6 +132,4 @@ public class Refuge extends ParseModel {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(this);
     }
-
-    public static Refuge defaultObject = new Refuge("", "", "", 0.0, 0.0, "", "", "", new Date(), new Date());
 }

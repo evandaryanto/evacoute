@@ -5,20 +5,20 @@ import com.merdekabyte.evacoute.data.model.exception.UnknownUserRoleException;
 import java.util.ArrayList;
 
 public class UserRole implements Comparable<UserRole>{
-    public static UserRole GOVERMENT = new UserRole("goverment");
+    public static UserRole GOVERMENT = new UserRole("government");
     public static UserRole FOUNDATION = new UserRole("foundation");
     public static UserRole PUBLIC = new UserRole("public");
 
     private String userRole;
 
-    public UserRole (String role)
+    public UserRole (String userRole)
     {
         ArrayList<String> roles = new ArrayList<String>(){{
-            add(UserRole.GOVERMENT.getRole());
-            add(UserRole.FOUNDATION.getRole());
-            add(UserRole.PUBLIC.getRole());
+            add("government");
+            add("foundation");
+            add("public");
         }};
-        if (!roles.contains(role)) throw new UnknownUserRoleException(role);
+        if (!roles.contains(userRole)) throw new UnknownUserRoleException(userRole);
         this.userRole = userRole;
     }
 
