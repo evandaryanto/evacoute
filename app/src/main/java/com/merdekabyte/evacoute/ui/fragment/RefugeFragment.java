@@ -57,18 +57,52 @@ public class RefugeFragment extends Fragment{
         getLocations();
     }
 
-    private void getLocations(){
-        this.refugeRepository = new RefugeRepository();
-        this.userRepository = new UserRepository();
-        List<Refuge> locations = new ArrayList<Refuge>();
+    private List<Refuge> resolveAll() {
         try {
+            List<Refuge> locations = new ArrayList<Refuge>();
             locations = this.refugeRepository.resolveAll();
+            return locations;
         } catch (com.parse.ParseException e) {
             Log.e("ParseException", e.getMessage());
             e.printStackTrace();
+            return new ArrayList<>();
         }
+    }
 
-        mAdapter = new LocationAdapter(getActivity(), locations);
+    private List<Refuge> resolvePublic() {
+        try {
+            List<User> users = this.userRepository.resolvePublicUser();
+            List<String> userIds = new ArrayList<>();
+            for (User user: users) userIds.add(user.getObjectId());
+            List<Refuge> locations = this.refugeRepository.resolveByUsers(userIds);
+            return locations;
+        } catch (com.parse.ParseException e) {
+            Log.e("ParseException", e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private List<Refuge> resolveNonPublic() {
+        try {
+            List<User> users = this.userRepository.resolveNonPublicUser();
+            List<String> userIds = new ArrayList<>();
+            for (User user: users) userIds.add(user.getObjectId());
+            List<Refuge> locations = this.refugeRepository.resolveByUsers(userIds);
+            return locations;
+        } catch (com.parse.ParseException e) {
+            Log.e("ParseException", e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private void getLocations(){
+        this.refugeRepository = new RefugeRepository();
+        this.userRepository = new UserRepository();
+
+
+        mAdapter = new LocationAdapter(getActivity(), this.resolveAll());
         mRecyclerView.setAdapter(mAdapter);
         mPullToRefreshView.setRefreshing(false);
     }
