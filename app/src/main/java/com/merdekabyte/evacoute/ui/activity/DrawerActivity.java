@@ -1,5 +1,6 @@
 package com.merdekabyte.evacoute.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -44,8 +45,8 @@ public class DrawerActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your location", Snackbar.LENGTH_LONG)
-                        .setAction("Location", null).show();
+                Intent i = new Intent(view.getContext(), MapActivity.class);
+                startActivity(i);
             }
         });
 
