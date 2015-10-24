@@ -35,22 +35,9 @@ public class RefugeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_refuge, container, false);
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.refuge_pull_refresh);
+        setmPullToRefreshView(v);
         mPullToRefreshView.setRefreshing(true);
         setmRecyclerView(v);
-        this.refugeRepository = new RefugeRepository();
-        List<Refuge> locations = new ArrayList<Refuge>();
-        try {
-            locations = this.refugeRepository.resolveAll();
-            Log.d("allRefuge", locations.toString());
-        } catch (com.parse.ParseException e) {
-            Log.e("ParseException", e.getMessage());
-            e.printStackTrace();
-        }
-
-        mAdapter = new LocationAdapter(getActivity(), locations);
-        mRecyclerView.setAdapter(mAdapter);
-        mPullToRefreshView.setRefreshing(false);
         return v;
     }
 
@@ -64,16 +51,38 @@ public class RefugeFragment extends Fragment{
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        //getList();
+        getLocations();
     }
 
-    private void getList(){
-//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-//        Retrofit retrofit = new Retrofit.Builder().baseUrl(VTEndpoint.URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
-//        VTTransactionInterface historyService = retrofit.create(VTTransactionInterface.class);
-//        historyService.getAllTransaction(InputActivity.M_ID).enqueue(this);
+    private void getLocations(){
+        this.refugeRepository = new RefugeRepository();
+        List<Refuge> locations = new ArrayList<Refuge>();
+        try {
+            locations = this.refugeRepository.resolveAll();
+            Log.d("allRefuge", locations.toString());
+        } catch (com.parse.ParseException e) {
+            Log.e("ParseException", e.getMessage());
+            e.printStackTrace();
+        }
+
+        mAdapter = new LocationAdapter(getActivity(), locations);
+        mRecyclerView.setAdapter(mAdapter);
+        mPullToRefreshView.setRefreshing(false);
     }
 
-
+    private void setmPullToRefreshView(View v){
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.refuge_pull_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getLocations();
+                    }
+                });
+            }
+        });
+    }
 
 }
