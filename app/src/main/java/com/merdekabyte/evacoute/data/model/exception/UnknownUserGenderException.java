@@ -6,7 +6,7 @@ public class UnknownUserGenderException extends RuntimeException {
         super("Unknown user gender");
     }
 
-    public UnknownUserGenderException(Character gender) {
+    public UnknownUserGenderException(String gender) {
         super("Unknown user gender : " + gender);
     }
 }
