@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.data.model.Refuge;
 import com.merdekabyte.evacoute.ui.activity.RefugeLocationActivity;
+import com.merdekabyte.evacoute.ui.helper.CachedBitmapLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -98,6 +100,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     public Bitmap loadBitmap(String url) throws IOException {
         Log.d("loadBitmap", url);
-        return BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
+        return CachedBitmapLoader.load(url);
     }
 }
