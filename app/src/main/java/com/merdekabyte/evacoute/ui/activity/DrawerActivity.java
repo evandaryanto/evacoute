@@ -18,9 +18,15 @@ import android.view.MenuItem;
 
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
+import com.parse.Parse;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    protected void initializeParse() {
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "AagLzvHfbym5hSVsfgtPIe2S4aVxIxuJrS1tLQcs", "VJD8wEvkodDkjGmXipwuPVcGrrwwcG5BFKK4EDPq");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class DrawerActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        initializeParse();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

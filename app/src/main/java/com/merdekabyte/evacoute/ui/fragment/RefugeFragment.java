@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.merdekabyte.evacoute.R;
-import com.merdekabyte.evacoute.data.model.RefugeLocation;
+import com.merdekabyte.evacoute.data.model.Refuge;
+import com.merdekabyte.evacoute.data.repository.RefugeRepository;
 import com.merdekabyte.evacoute.ui.adapter.LocationAdapter;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -26,6 +28,8 @@ public class RefugeFragment extends Fragment{
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 2000;
 
+    private RefugeRepository refugeRepository;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,11 +38,14 @@ public class RefugeFragment extends Fragment{
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.refuge_pull_refresh);
         mPullToRefreshView.setRefreshing(true);
         setmRecyclerView(v);
-        List<RefugeLocation> locations = new ArrayList<RefugeLocation>(); //response.body()
-        RefugeLocation loc = new RefugeLocation();
-        locations.add(loc);
-        locations.add(loc);
-        locations.add(loc);
+        this.refugeRepository = new RefugeRepository();
+        List<Refuge> locations = new ArrayList<Refuge>();
+        try {
+            locations = this.refugeRepository.resolveAll();
+        } catch (com.parse.ParseException e) {
+            Log.e("ParseException", e.getMessage());
+            e.printStackTrace();
+        }
 
         mAdapter = new LocationAdapter(getActivity(), locations);
         mRecyclerView.setAdapter(mAdapter);

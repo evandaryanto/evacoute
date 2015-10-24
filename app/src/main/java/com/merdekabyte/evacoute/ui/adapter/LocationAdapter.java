@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.merdekabyte.evacoute.R;
-import com.merdekabyte.evacoute.data.model.RefugeLocation;
+import com.merdekabyte.evacoute.data.model.Refuge;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
     private Context mContext;
-    private List<RefugeLocation> mDataset;
+    private List<Refuge> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -36,7 +36,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public LocationAdapter(Context context, List<RefugeLocation> myDataset) {
+    public LocationAdapter(Context context, List<Refuge> myDataset) {
         mContext = context;
         mDataset = myDataset;
     }
