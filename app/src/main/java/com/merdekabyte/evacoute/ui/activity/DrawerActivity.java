@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.merdekabyte.evacoute.R;
+import com.merdekabyte.evacoute.ui.fragment.BiodataFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
 
 public class DrawerActivity extends AppCompatActivity
@@ -46,6 +47,8 @@ public class DrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_location_all);
+        updateFragment(new RefugeFragment(), "Evacoute");
     }
 
     @Override
@@ -87,13 +90,13 @@ public class DrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_location_all) {
-            updateFragment(new RefugeFragment(), "Refugee");
+            updateFragment(new RefugeFragment(), "Evacoute");
         } else if (id == R.id.nav_location_central) {
 
         } else if (id == R.id.nav_location_resident) {
 
         } else if (id == R.id.nav_information) {
-
+            updateFragment(new BiodataFragment(), "Data Diri");
         } else if (id == R.id.nav_search) {
 
         } else if (id == R.id.nav_help_me) {
