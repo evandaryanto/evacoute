@@ -55,10 +55,6 @@ public class RefugeFragment extends Fragment{
     }
 
     private void getLocations(){
-//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-//        Retrofit retrofit = new Retrofit.Builder().baseUrl(VTEndpoint.URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
-//        VTTransactionInterface historyService = retrofit.create(VTTransactionInterface.class);
-//        historyService.getAllTransaction(InputActivity.M_ID).enqueue(this);
         this.refugeRepository = new RefugeRepository();
         List<Refuge> locations = new ArrayList<Refuge>();
         try {
