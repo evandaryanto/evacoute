@@ -42,6 +42,7 @@ public class RefugeFragment extends Fragment{
         List<Refuge> locations = new ArrayList<Refuge>();
         try {
             locations = this.refugeRepository.resolveAll();
+            Log.d("allRefuge", locations.toString());
         } catch (com.parse.ParseException e) {
             Log.e("ParseException", e.getMessage());
             e.printStackTrace();

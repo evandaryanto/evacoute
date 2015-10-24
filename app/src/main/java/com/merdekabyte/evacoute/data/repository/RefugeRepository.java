@@ -9,7 +9,7 @@ import java.util.List;
 
 public class RefugeRepository {
 
-    private static String className = "evacuation";
+    private static String className = "refuge";
 
     public List<Refuge> resolveAll() throws ParseException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
