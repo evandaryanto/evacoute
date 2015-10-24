@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.merdekabyte.evacoute.ui.fragment.RefugeLocationGalleryFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeLocationInformationFragment;
 
 /**
@@ -32,7 +33,7 @@ public class RefugeLocationAdapter extends FragmentStatePagerAdapter{
                 item = new RefugeLocationInformationFragment();
                 break;
             case 1:
-                item = new RefugeLocationInformationFragment();
+                item = new RefugeLocationGalleryFragment();
                 break;
             case 2:
                 item = new RefugeLocationInformationFragment();
