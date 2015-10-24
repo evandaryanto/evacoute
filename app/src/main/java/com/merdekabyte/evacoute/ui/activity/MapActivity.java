@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
@@ -50,7 +51,8 @@ public class MapActivity extends AppCompatActivity
         OnMapReadyCallback {
 
     private GoogleApiClient mGoogleApiClient;
-
+    private Location mLastLocation;
+    private GoogleMap mGoogleMap;
     private RefugeRepository refugeRepository;
 
     // These settings are the same as the settings for the map. They will in fact give you updates
@@ -68,14 +70,20 @@ public class MapActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        buildGoogleApiClient();
         refugeRepository = new RefugeRepository();
+
+    }
+
+    protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
                 .build();
     }
 
@@ -93,10 +101,11 @@ public class MapActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap map) {
+        this.mGoogleMap = map;
         map.setMyLocationEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(true);
-        map.getUiSettings().setRotateGesturesEnabled(false);
-        map.setOnMyLocationButtonClickListener(this);
+//        map.getUiSettings().setRotateGesturesEnabled(false);
+//        map.setOnMyLocationButtonClickListener(this);
 
         List<Refuge> locations = new ArrayList<Refuge>();
         try {
@@ -129,10 +138,16 @@ public class MapActivity extends AppCompatActivity
      */
     @Override
     public void onConnected(Bundle connectionHint) {
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient,
-                REQUEST,
-                this);  // LocationListener
+//        LocationServices.FusedLocationApi.requestLocationUpdates(
+//                mGoogleApiClient,
+//                REQUEST,
+//                this);  // LocationListener
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+
+        if (mLastLocation != null) {
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude())));
+        }
     }
 
     /**
