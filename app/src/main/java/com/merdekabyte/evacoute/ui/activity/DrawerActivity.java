@@ -37,15 +37,12 @@ public class DrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent i = new Intent(this, MapActivity.class);
-        startActivity(i);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your location", Snackbar.LENGTH_LONG)
-                        .setAction("Location", null).show();
+                Intent i = new Intent(view.getContext(), MapActivity.class);
+                startActivity(i);
             }
         });
 
