@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.merdekabyte.evacoute.R;
-import com.merdekabyte.evacoute.ui.fragment.RefugeeFragment;
+import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,7 +87,7 @@ public class DrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_location_all) {
-            updateFragment(new RefugeeFragment(), "Refugee");
+            updateFragment(new RefugeFragment(), "Refugee");
         } else if (id == R.id.nav_location_central) {
 
         } else if (id == R.id.nav_location_resident) {
