@@ -101,8 +101,12 @@ public class RefugeFragment extends Fragment{
         this.refugeRepository = new RefugeRepository();
         this.userRepository = new UserRepository();
 
-
+        // if resolve all
         mAdapter = new LocationAdapter(getActivity(), this.resolveAll());
+        // if resolve public only
+        // mAdapter = new LocationAdapter(getActivity(), this.resolvePublic());
+        // if resolve non public only
+        // mAdapter = new LocationAdapter(getActivity(), this.resolveNonPublic());
         mRecyclerView.setAdapter(mAdapter);
         mPullToRefreshView.setRefreshing(false);
     }
