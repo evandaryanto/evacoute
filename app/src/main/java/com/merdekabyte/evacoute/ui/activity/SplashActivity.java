@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.android.gms.auth.api.Auth;
 import com.merdekabyte.evacoute.R;
 
 /**
@@ -26,7 +27,7 @@ public class SplashActivity extends Activity {
 			 */
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, DrawerActivity.class);
+                Intent i = new Intent(SplashActivity.this, AuthActivity.class);
                 startActivity(i);
                 finish();
             }

@@ -32,8 +32,13 @@ public class DrawerActivity extends AppCompatActivity
     SearchBox searchBox;
 
     protected void initializeParse() {
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "AagLzvHfbym5hSVsfgtPIe2S4aVxIxuJrS1tLQcs", "VJD8wEvkodDkjGmXipwuPVcGrrwwcG5BFKK4EDPq");
+        try{
+            Parse.enableLocalDatastore(this);
+            Parse.initialize(this, "AagLzvHfbym5hSVsfgtPIe2S4aVxIxuJrS1tLQcs", "VJD8wEvkodDkjGmXipwuPVcGrrwwcG5BFKK4EDPq");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
