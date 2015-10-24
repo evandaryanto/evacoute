@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.data.model.Refuge;
+import com.merdekabyte.evacoute.data.model.User;
 import com.merdekabyte.evacoute.data.repository.RefugeRepository;
+import com.merdekabyte.evacoute.data.repository.UserRepository;
 import com.merdekabyte.evacoute.ui.adapter.LocationAdapter;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -29,6 +31,7 @@ public class RefugeFragment extends Fragment{
     public static final int REFRESH_DELAY = 2000;
 
     private RefugeRepository refugeRepository;
+    private UserRepository userRepository;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,10 +59,10 @@ public class RefugeFragment extends Fragment{
 
     private void getLocations(){
         this.refugeRepository = new RefugeRepository();
+        this.userRepository = new UserRepository();
         List<Refuge> locations = new ArrayList<Refuge>();
         try {
             locations = this.refugeRepository.resolveAll();
-            Log.d("allRefuge", locations.toString());
         } catch (com.parse.ParseException e) {
             Log.e("ParseException", e.getMessage());
             e.printStackTrace();

@@ -43,13 +43,15 @@ public class User extends ParseModel {
         this.identificationNumber = parseObject.getString("identificationNumber");
         this.password = parseObject.getString("password");
         this.email = parseObject.getString("email");
-        this.gender = new UserGender(parseObject.getString("gender").charAt(0));
+        this.gender = new UserGender(parseObject.getString("gender"));
         this.disease = parseObject.getString("disease");
         this.otherInformation = parseObject.getString("otherInformation");
         this.birthDate = parseObject.getDate("birthDate");
         this.role = new UserRole(parseObject.getString("role"));
         this.phoneNumber = parseObject.getString("phoneNumber");
     }
+
+//    public static User defaultObject = new User("", "", "", "", "", UserGender.MALE, "", "", new Date(), UserRole.PUBLIC, "", new Date(), new Date());
 
     // Getters and Setters
 

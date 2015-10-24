@@ -5,22 +5,22 @@ import com.merdekabyte.evacoute.data.model.exception.UnknownUserGenderException;
 import java.util.ArrayList;
 
 public class UserGender implements Comparable<UserGender>{
-    public static UserGender MALE = new UserGender('M');
-    public static UserGender FEMALE = new UserGender('F');
+    public static UserGender MALE = new UserGender("M");
+    public static UserGender FEMALE = new UserGender("F");
 
-    private Character gender;
+    private String gender;
 
-    public UserGender (Character gender)
+    public UserGender (String gender)
     {
-        ArrayList<Character> genders = new ArrayList<Character>(){{
-            add(UserGender.FEMALE.getGender());
-            add(UserGender.MALE.getGender());
+        ArrayList<String> genders = new ArrayList<String>(){{
+            add("F");
+            add("M");
         }};
         if (!genders.contains(gender)) throw new UnknownUserGenderException(gender);
         this.gender = gender;
     }
 
-    public Character getGender() {
+    public String getGender() {
         return gender;
     }
 
