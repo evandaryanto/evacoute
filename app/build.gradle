@@ -41,4 +41,6 @@ dependencies {
         [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.1'],
         [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.1']
     )
+    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+    compile 'com.google.zxing:core:3.2.0'
 }
