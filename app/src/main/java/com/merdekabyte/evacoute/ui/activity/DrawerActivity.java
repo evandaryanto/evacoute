@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.fragment.BiodataFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;

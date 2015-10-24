@@ -4,11 +4,11 @@
     <item android:title="Lokasi Pengungsian">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:id="@+id/nav_location_all" android:icon="@android:drawable/ic_menu_share"
+                <item android:id="@+id/nav_location_all" android:icon="@drawable/all"
                     android:title="Semua Lokasi" />
-                <item android:id="@+id/nav_location_central" android:icon="@android:drawable/ic_menu_share"
+                <item android:id="@+id/nav_location_central" android:icon="@drawable/hall"
                     android:title="Pengungsian Terpusat" />
-                <item android:id="@+id/nav_location_resident" android:icon="@android:drawable/ic_menu_share"
+                <item android:id="@+id/nav_location_resident" android:icon="@drawable/home"
                     android:title="Rumah Warga" />
             </group>
         </menu>
@@ -17,7 +17,7 @@
     <item android:title="Manajemen">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:id="@+id/nav_information" android:icon="@android:drawable/ic_menu_share"
+                <item android:id="@+id/nav_information" android:icon="@drawable/peopleinfo"
                     android:title="Informasi Pribadi" />
             </group>
         </menu>
@@ -26,9 +26,9 @@
     <item android:title="Asistensi">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:id="@+id/nav_search" android:icon="@android:drawable/ic_menu_share"
+                <item android:id="@+id/nav_search" android:icon="@drawable/findpeople"
                     android:title="Cari Pengungsi" />
-                <item android:id="@+id/nav_help_me" android:icon="@android:drawable/ic_menu_share"
+                <item android:id="@+id/nav_help_me" android:icon="@drawable/help"
                     android:title="Bantuan Segera" />
             </group>
         </menu>

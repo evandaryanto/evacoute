@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="tabsScrollColor">#8cba9c</color>
     <color name="cThemeColor">#0da94a</color>
+    <color name="colorButtonStandard">#34495d</color>
 </resources>
