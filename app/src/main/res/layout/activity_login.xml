@@ -20,7 +20,7 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:padding="10dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="100dp"
         android:hint="Username"
         android:textSize="12sp"
         android:background="#fff"
@@ -85,7 +85,7 @@
             android:layout_height="36dp"
             android:text="FACEBOOK"
             android:textColor="#fff"
-            android:background="#34495d"
+            android:background="#3b579d"
             android:layout_marginRight="10dp"
             android:id="@+id/auth_facebook"/>
 
@@ -94,7 +94,7 @@
             android:layout_height="36dp"
             android:text="GOOGLE+"
             android:textColor="#fff"
-            android:background="#34495d"
+            android:background="#e03c38"
             android:id="@+id/auth_google"/>
 
     </LinearLayout>
