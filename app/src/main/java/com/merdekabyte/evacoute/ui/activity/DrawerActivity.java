@@ -23,9 +23,13 @@ import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.fragment.BiodataFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
 import com.parse.Parse;
+import com.quinny898.library.persistentsearch.SearchBox;
+import com.quinny898.library.persistentsearch.SearchResult;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    SearchBox searchBox;
 
     protected void initializeParse() {
         Parse.enableLocalDatastore(this);
@@ -38,6 +42,8 @@ public class DrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        searchBox = (SearchBox) findViewById(R.id.search_box);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -92,6 +98,41 @@ public class DrawerActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_search) {
+            searchBox = (SearchBox) findViewById(R.id.search_box);
+            searchBox.revealFromMenuItem(R.id.search_box, this);
+            searchBox.setSearchListener(new SearchBox.SearchListener() {
+                @Override
+                public void onSearchOpened() {
+
+                }
+
+                @Override
+                public void onSearchCleared() {
+
+                }
+
+                @Override
+                public void onSearchClosed() {
+                    closeSearch();
+                }
+
+                @Override
+                public void onSearchTermChanged(String s) {
+
+                }
+
+                @Override
+                public void onSearch(String s) {
+
+                }
+
+                @Override
+                public void onResultClick(SearchResult searchResult) {
+
+                }
+            });
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -144,5 +185,9 @@ public class DrawerActivity extends AppCompatActivity
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    protected void closeSearch() {
+        searchBox.hideCircularly(this);
     }
 }
