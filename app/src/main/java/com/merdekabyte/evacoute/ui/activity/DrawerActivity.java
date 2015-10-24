@@ -103,11 +103,23 @@ public class DrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_location_all) {
-            updateFragment(new RefugeFragment(), "Evacoute");
+            RefugeFragment fragment = new RefugeFragment();
+            Bundle args = new Bundle();
+            args.putString("state", "");
+            fragment.setArguments(args);
+            updateFragment(fragment, "Evacoute");
         } else if (id == R.id.nav_location_central) {
-
+            RefugeFragment fragment = new RefugeFragment();
+            Bundle args = new Bundle();
+            args.putString("state", "nonPublic");
+            fragment.setArguments(args);
+            updateFragment(fragment, "Evacoute");
         } else if (id == R.id.nav_location_resident) {
-
+            RefugeFragment fragment = new RefugeFragment();
+            Bundle args = new Bundle();
+            args.putString("state", "public");
+            fragment.setArguments(args);
+            updateFragment(fragment, "Evacoute");
         } else if (id == R.id.nav_information) {
             updateFragment(new BiodataFragment(), "Data Diri");
         } else if (id == R.id.nav_search) {

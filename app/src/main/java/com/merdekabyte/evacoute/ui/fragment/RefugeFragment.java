@@ -57,18 +57,67 @@ public class RefugeFragment extends Fragment{
         getLocations();
     }
 
-    private void getLocations(){
-        this.refugeRepository = new RefugeRepository();
-        this.userRepository = new UserRepository();
-        List<Refuge> locations = new ArrayList<Refuge>();
+    private List<Refuge> resolveAll() {
         try {
+            List<Refuge> locations = new ArrayList<Refuge>();
             locations = this.refugeRepository.resolveAll();
+            return locations;
         } catch (com.parse.ParseException e) {
             Log.e("ParseException", e.getMessage());
             e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private List<Refuge> resolvePublic() {
+        try {
+            List<User> users = this.userRepository.resolvePublicUser();
+            List<String> userIds = new ArrayList<>();
+            for (User user: users) userIds.add(user.getObjectId());
+            List<Refuge> locations = this.refugeRepository.resolveByUsers(userIds);
+            return locations;
+        } catch (com.parse.ParseException e) {
+            Log.e("ParseException", e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private List<Refuge> resolveNonPublic() {
+        try {
+            List<User> users = this.userRepository.resolveNonPublicUser();
+            List<String> userIds = new ArrayList<>();
+            for (User user: users) userIds.add(user.getObjectId());
+            List<Refuge> locations = this.refugeRepository.resolveByUsers(userIds);
+            return locations;
+        } catch (com.parse.ParseException e) {
+            Log.e("ParseException", e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private void getLocations(){
+        this.refugeRepository = new RefugeRepository();
+        this.userRepository = new UserRepository();
+
+        Bundle arguments = getArguments();
+        String state = "";
+        if (arguments != null) {
+            state = arguments.getString("state");
+            if (state == null) {
+                state = "";
+            }
         }
 
-        mAdapter = new LocationAdapter(getActivity(), locations);
+        if(state.equals("public")) {
+            mAdapter = new LocationAdapter(getActivity(), this.resolvePublic());
+        } else if (state.equals("nonPublic")) {
+            mAdapter = new LocationAdapter(getActivity(), this.resolveNonPublic());
+        } else {
+            mAdapter = new LocationAdapter(getActivity(), this.resolveAll());
+        }
+
         mRecyclerView.setAdapter(mAdapter);
         mPullToRefreshView.setRefreshing(false);
     }

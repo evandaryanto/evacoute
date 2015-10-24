@@ -18,21 +18,33 @@ import java.util.List;
  */
 public class GalleryGridAdapter extends RecyclerView.Adapter<GalleryGridAdapter.ViewHolder> {
     private Context mContext;
-    List<Integer> mItems;
+    List<String> mItems;
 
     public GalleryGridAdapter(Context context) {
         super();
         mContext = context;
-        mItems = new ArrayList<Integer>();
-        int ic = R.drawable.refuge_evan;
-        mItems.add(ic);
-        mItems.add(ic);
-        mItems.add(ic);
-        mItems.add(ic);
-        mItems.add(ic);
-        mItems.add(ic);
-        mItems.add(ic);
-        mItems.add(ic);
+        mItems = new ArrayList<String>();
+        String uri = "https://evacoute.s3.amazonaws.com/bulk/1.jpg";
+        String uri1 = "https://evacoute.s3.amazonaws.com/bulk/2.jpg";
+        String uri2 = "https://evacoute.s3.amazonaws.com/bulk/3.jpg";
+        String uri3 = "https://evacoute.s3.amazonaws.com/bulk/4.jpg";
+        String uri4 = "https://evacoute.s3.amazonaws.com/bulk/5.jpg";
+        String uri5 = "https://evacoute.s3.amazonaws.com/bulk/6.jpg";
+        String uri6 = "https://evacoute.s3.amazonaws.com/bulk/7.jpg";
+        String uri7 = "https://evacoute.s3.amazonaws.com/bulk/8.jpg";
+        String uri8 = "https://evacoute.s3.amazonaws.com/bulk/9.jpg";
+
+
+        //int ic = R.drawable.refuge_evan;
+        mItems.add(uri);
+        mItems.add(uri1);
+        mItems.add(uri2);
+        mItems.add(uri3);
+        mItems.add(uri4);
+        mItems.add(uri5);
+        mItems.add(uri6);
+        mItems.add(uri7);
+        mItems.add(uri8);
     }
 
     @Override
