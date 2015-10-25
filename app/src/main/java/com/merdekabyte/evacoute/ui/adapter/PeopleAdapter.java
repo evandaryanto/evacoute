@@ -16,6 +16,8 @@ import com.merdekabyte.evacoute.ui.helper.CachedBitmapLoader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Michinggun on 10/25/2015.
@@ -68,7 +70,13 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        int min = 1;
+        int max = 9;
+        Random rand = new Random();
+        int randomIndex = rand.nextInt((max - min) + 1) + min;
+        String bucketUrl = "http://evacoute.s3-ap-southeast-1.amazonaws.com/people/guy-" + randomIndex + ".jpg";
         holder.name.setText(mDataset.get(position));
+        holder.image.setImageBitmap(CachedBitmapLoader.load(bucketUrl));
 
 //        try {
 ////            Bitmap image = loadBitmap(refuge.getImageUrl());
