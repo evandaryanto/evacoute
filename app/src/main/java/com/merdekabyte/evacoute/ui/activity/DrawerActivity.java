@@ -19,10 +19,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.fragment.BiodataFragment;
 import com.merdekabyte.evacoute.ui.fragment.FindPeopleFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
+import com.merdekabyte.evacoute.ui.fragment.VolenteersRefugeFragment;
 import com.parse.Parse;
 import com.quinny898.library.persistentsearch.SearchBox;
 import com.quinny898.library.persistentsearch.SearchResult;
@@ -138,7 +141,7 @@ public class DrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_help_me) {
 
         } else if (id == R.id.nav_manage_refege) {
-
+            updateFragment(new VolenteersRefugeFragment(), "Manajemen Tempat Pengungsi");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -159,4 +162,13 @@ public class DrawerActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        View parentLayout = findViewById(R.id.drawer_container_body);
+        if (scanResult != null) {
+            Snackbar.make(parentLayout, "Alif Raditya berhasil ditambahkan", Snackbar.LENGTH_LONG).show();
+        }
+    }
 }

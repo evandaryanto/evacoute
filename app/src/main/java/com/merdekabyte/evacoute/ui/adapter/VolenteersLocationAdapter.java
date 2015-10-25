@@ -1,5 +1,6 @@
 package com.merdekabyte.evacoute.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,9 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.data.model.Refuge;
 import com.merdekabyte.evacoute.ui.activity.RefugeLocationActivity;
@@ -32,17 +36,18 @@ public class VolenteersLocationAdapter extends RecyclerView.Adapter<VolenteersLo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         // set the view's size, margins, paddings and layout parameters
-        public TextView name, location, contact;
+        public TextView name, location;
         public ImageView image;
         public View layout;
+        public Button qrCode;
 
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.refuge_item_name);
             location = (TextView) v.findViewById(R.id.refuge_item_location);
-            contact = (TextView) v.findViewById(R.id.refuge_item_contact);
             image = (ImageView) v.findViewById(R.id.refuge_item_image);
             layout = (RelativeLayout) v.findViewById(R.id.refuge_item_layout);
+            qrCode = (Button) v.findViewById(R.id.refuge_item_volenteer_qrcode);
         }
     }
 
@@ -69,7 +74,6 @@ public class VolenteersLocationAdapter extends RecyclerView.Adapter<VolenteersLo
         try {
             holder.name.setText(refuge.getName());
             holder.location.setText(refuge.getLocation());
-            holder.contact.setText(refuge.getContact());
             Bitmap image = loadBitmap(refuge.getImageUrl());
             holder.image.setImageBitmap(image);
         } catch (IOException e) {
@@ -87,6 +91,13 @@ public class VolenteersLocationAdapter extends RecyclerView.Adapter<VolenteersLo
                 mContext.startActivity(i);
             }
         });
+
+        holder.qrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCapture();
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -98,5 +109,14 @@ public class VolenteersLocationAdapter extends RecyclerView.Adapter<VolenteersLo
     public Bitmap loadBitmap(String url) throws IOException {
         Log.d("loadBitmap", url);
         return CachedBitmapLoader.load(url);
+    }
+
+    private void startCapture(){
+        IntentIntegrator integrator = new IntentIntegrator((Activity)mContext);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("Scan Evacoute-QR");
+        integrator.setBeepEnabled(true);
+        integrator.setOrientationLocked(true);
+        integrator.initiateScan();
     }
 }

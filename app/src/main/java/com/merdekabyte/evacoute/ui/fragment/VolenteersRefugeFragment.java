@@ -1,6 +1,6 @@
 package com.merdekabyte.evacoute.ui.fragment;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +15,7 @@ import com.merdekabyte.evacoute.data.model.User;
 import com.merdekabyte.evacoute.data.repository.RefugeRepository;
 import com.merdekabyte.evacoute.data.repository.UserRepository;
 import com.merdekabyte.evacoute.ui.adapter.LocationAdapter;
+import com.merdekabyte.evacoute.ui.adapter.VolenteersLocationAdapter;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 /**
  * Created by evandaryanto on 10/25/15.
  */
-public class VolenteersRefugeFragment extends Fragment{
+public class VolenteersRefugeFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -112,11 +113,11 @@ public class VolenteersRefugeFragment extends Fragment{
         }
 
         if(state.equals("public")) {
-            mAdapter = new LocationAdapter(getActivity(), this.resolvePublic());
+            mAdapter = new VolenteersLocationAdapter(getActivity(), this.resolvePublic());
         } else if (state.equals("nonPublic")) {
-            mAdapter = new LocationAdapter(getActivity(), this.resolveNonPublic());
+            mAdapter = new VolenteersLocationAdapter(getActivity(), this.resolveNonPublic());
         } else {
-            mAdapter = new LocationAdapter(getActivity(), this.resolveAll());
+            mAdapter = new VolenteersLocationAdapter(getActivity(), this.resolveAll());
         }
 
         mRecyclerView.setAdapter(mAdapter);
