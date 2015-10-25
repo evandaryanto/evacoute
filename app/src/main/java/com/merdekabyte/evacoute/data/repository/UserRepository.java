@@ -12,14 +12,25 @@ public class UserRepository implements Repository<User> {
 
     public static String className = "user";
 
+    public static List<User> cachedAll;
+    public static List<User> cachedPublic;
+    public static List<User> cachedNonPublic;
+
     public List<User> resolveAll() throws ParseException {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
-        List<ParseObject> parseObjects = query.find();
-        List<User> users = new ArrayList<User>();
-        for (ParseObject object : parseObjects) {
-            users.add(new User(object));
+
+        if (cachedAll != null)
+            return cachedAll;
+        else {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
+            List<ParseObject> parseObjects = query.find();
+            List<User> users = new ArrayList<User>();
+            for (ParseObject object : parseObjects) {
+                users.add(new User(object));
+            }
+            UserRepository.cachedAll = users;
+            return users;
         }
-        return users;
+
     }
 
     public User resolveById(String objectId) throws ParseException {
@@ -29,22 +40,32 @@ public class UserRepository implements Repository<User> {
     }
 
     public List<User> resolvePublicUser() throws ParseException {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
-        List<ParseObject> parseObjects = query.whereEqualTo("role", UserRole.PUBLIC.getRole()).find();
-        List<User> users = new ArrayList<User>();
-        for (ParseObject object : parseObjects) {
-            users.add(new User(object));
+        if (cachedPublic != null)
+            return cachedPublic;
+        else {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
+            List<ParseObject> parseObjects = query.whereEqualTo("role", UserRole.PUBLIC.getRole()).find();
+            List<User> users = new ArrayList<User>();
+            for (ParseObject object : parseObjects) {
+                users.add(new User(object));
+            }
+            UserRepository.cachedPublic = users;
+            return users;
         }
-        return users;
     }
 
     public List<User> resolveNonPublicUser() throws ParseException {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
-        List<ParseObject> parseObjects = query.whereNotEqualTo("role", UserRole.PUBLIC.getRole()).find();
-        List<User> users = new ArrayList<User>();
-        for (ParseObject object : parseObjects) {
-            users.add(new User(object));
+        if (cachedNonPublic != null)
+            return cachedNonPublic;
+        else {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
+            List<ParseObject> parseObjects = query.whereNotEqualTo("role", UserRole.PUBLIC.getRole()).find();
+            List<User> users = new ArrayList<User>();
+            for (ParseObject object : parseObjects) {
+                users.add(new User(object));
+            }
+            UserRepository.cachedNonPublic = users;
+            return users;
         }
-        return users;
     }
 }

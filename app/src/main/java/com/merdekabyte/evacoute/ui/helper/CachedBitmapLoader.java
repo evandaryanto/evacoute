@@ -19,6 +19,8 @@ public class CachedBitmapLoader {
 
     public static HashMap<String, Bitmap> cache;
 
+    public static int randomGuyIndex = 1;
+
     public static  Bitmap load(String url) {
         if(CachedBitmapLoader.cache == null)
             CachedBitmapLoader.cache = new HashMap<String, Bitmap>();
@@ -34,6 +36,13 @@ public class CachedBitmapLoader {
                 return null;
             }
         }
+    }
+
+    public static Bitmap getRandomGuy() {
+        String bucketUrl = "http://evacoute.s3-ap-southeast-1.amazonaws.com/people/guy-" + randomGuyIndex + ".jpg";
+        randomGuyIndex = randomGuyIndex + 1;
+        if (randomGuyIndex > 9) randomGuyIndex = 1;
+        return CachedBitmapLoader.load(bucketUrl);
     }
 
 }

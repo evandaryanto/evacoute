@@ -59,6 +59,7 @@ public class RefugeLocationPeopleAdapter extends RecyclerView.Adapter<RefugeLoca
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.name.setText(mDataset.get(position));
+        holder.image.setImageBitmap(CachedBitmapLoader.getRandomGuy());
 
 //        try {
 ////            Bitmap image = loadBitmap(refuge.getImageUrl());

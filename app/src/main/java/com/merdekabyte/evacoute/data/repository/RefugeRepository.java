@@ -15,15 +15,22 @@ public class RefugeRepository {
 
     public static String className = "refuge";
 
+    public static List<Refuge> cachedAll;
+
     private ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
 
     public List<Refuge> resolveAll() throws ParseException {
-        List<ParseObject> parseObjects = this.query.find();
-        List<Refuge> refuges = new ArrayList<>();
-        for (ParseObject object : parseObjects) {
-            refuges.add(new Refuge(object));
+        if (cachedAll != null)
+            return cachedAll;
+        else {
+            List<ParseObject> parseObjects = this.query.find();
+            List<Refuge> refuges = new ArrayList<>();
+            for (ParseObject object : parseObjects) {
+                refuges.add(new Refuge(object));
+            }
+            RefugeRepository.cachedAll = refuges;
+            return refuges;
         }
-        return refuges;
     }
 
     public Refuge resolveById(String objectId) throws ParseException {
