@@ -15,6 +15,8 @@ import com.merdekabyte.evacoute.data.model.User;
 import com.merdekabyte.evacoute.data.repository.RefugeRepository;
 import com.merdekabyte.evacoute.data.repository.UserRepository;
 import com.merdekabyte.evacoute.ui.adapter.LocationAdapter;
+import com.quinny898.library.persistentsearch.SearchBox;
+import com.quinny898.library.persistentsearch.SearchResult;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class RefugeFragment extends Fragment{
     private RefugeRepository refugeRepository;
     private UserRepository userRepository;
 
+    SearchBox searchBox;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +45,39 @@ public class RefugeFragment extends Fragment{
         setmPullToRefreshView(v);
         mPullToRefreshView.setRefreshing(true);
         setmRecyclerView(v);
+        searchBox = (SearchBox) getActivity().findViewById(R.id.search_box);
+        searchBox.setSearchListener(new SearchBox.SearchListener() {
+            @Override
+            public void onSearchOpened() {
+
+            }
+
+            @Override
+            public void onSearchCleared() {
+
+            }
+
+            @Override
+            public void onSearchClosed() {
+                closeSearch();
+            }
+
+            @Override
+            public void onSearchTermChanged(String s) {
+                LocationAdapter locationAdapter = (LocationAdapter) mAdapter;
+                locationAdapter.filterDataSet(s);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSearch(String s) {
+            }
+
+            @Override
+            public void onResultClick(SearchResult searchResult) {
+
+            }
+        });
         return v;
     }
 
@@ -137,4 +174,7 @@ public class RefugeFragment extends Fragment{
         });
     }
 
+    protected void closeSearch() {
+        searchBox.hideCircularly(getActivity());
+    }
 }

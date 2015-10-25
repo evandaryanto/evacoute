@@ -21,11 +21,16 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.fragment.BiodataFragment;
+import com.merdekabyte.evacoute.ui.fragment.FindPeopleFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
 import com.parse.Parse;
+import com.quinny898.library.persistentsearch.SearchBox;
+import com.quinny898.library.persistentsearch.SearchResult;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    SearchBox searchBox;
 
     protected void initializeParse() {
         Parse.enableLocalDatastore(this);
@@ -38,6 +43,8 @@ public class DrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        searchBox = (SearchBox) findViewById(R.id.search_box);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -92,10 +99,10 @@ public class DrawerActivity extends AppCompatActivity
         if (id == R.id.action_logout) {
             return true;
         }
-//        else if (id == R.id.action_as_volunteers) {
-//            MenuItem volunteerMenu = (MenuItem) findViewById(R.id.menu_volunteers);
-//            volunteerMenu.setVisible(true);
-//        }
+        else if (id == R.id.action_search) {
+            searchBox = (SearchBox) findViewById(R.id.search_box);
+            searchBox.revealFromMenuItem(R.id.search_box, this);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -126,11 +133,11 @@ public class DrawerActivity extends AppCompatActivity
             updateFragment(fragment, "Evacoute");
         } else if (id == R.id.nav_information) {
             updateFragment(new BiodataFragment(), "Data Diri");
-         } else if (id == R.id.nav_search) {
+        } else if (id == R.id.nav_search) {
+            updateFragment(new FindPeopleFragment(), "Cari Pengungsi");
+        } else if (id == R.id.nav_help_me) {
 
-         } else if (id == R.id.nav_help_me) {
-
-         } else if (id == R.id.nav_manage_refege) {
+        } else if (id == R.id.nav_manage_refege) {
 
         }
 
@@ -151,4 +158,5 @@ public class DrawerActivity extends AppCompatActivity
             getSupportActionBar().setTitle(title);
         }
     }
+
 }

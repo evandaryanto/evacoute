@@ -33,6 +33,13 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <activity
+            android:name=".ui.activity.AuthActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
         <activity
             android:name=".ui.activity.MapActivity"
             android:label="@string/title_activity_map"
@@ -44,7 +51,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCQKlvOQysxL8gWCcU2H-0OpF_RuvzAbDU"/>
+            android:value="AIzaSyCQKlvOQysxL8gWCcU2H-0OpF_RuvzAbDU" />
 
     </application>
 
