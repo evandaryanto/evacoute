@@ -89,9 +89,13 @@ public class DrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
             return true;
         }
+//        else if (id == R.id.action_as_volunteers) {
+//            MenuItem volunteerMenu = (MenuItem) findViewById(R.id.menu_volunteers);
+//            volunteerMenu.setVisible(true);
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -122,9 +126,11 @@ public class DrawerActivity extends AppCompatActivity
             updateFragment(fragment, "Evacoute");
         } else if (id == R.id.nav_information) {
             updateFragment(new BiodataFragment(), "Data Diri");
-        } else if (id == R.id.nav_search) {
+         } else if (id == R.id.nav_search) {
 
-        } else if (id == R.id.nav_help_me) {
+         } else if (id == R.id.nav_help_me) {
+
+         } else if (id == R.id.nav_manage_refege) {
 
         }
 

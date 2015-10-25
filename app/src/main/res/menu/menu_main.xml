@@ -10,8 +10,14 @@
         android:icon="@drawable/ic_search92"/>
 
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:id="@+id/action_logout"
+        android:title="@string/action_logout"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_as_volunteers"
+        android:title="@string/action_as_volunteers"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
