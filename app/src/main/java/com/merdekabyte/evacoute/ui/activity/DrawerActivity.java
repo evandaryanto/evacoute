@@ -54,6 +54,16 @@ public class DrawerActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), MapActivity.class);
+                String judul = getActionBar().getTitle().toString();
+                if (judul == "Pengungsian Publik") {
+                    i.putExtra("Category","public");
+                }
+                else if (judul == "Pengungsian Rumah Warga") {
+                    i.putExtra("Category","nonPublic");
+                }
+                else {
+                    i.putExtra("Category", "All");
+                }
                 startActivity(i);
             }
         });

@@ -45,6 +45,16 @@ public class RefugeFragment extends Fragment{
         setmPullToRefreshView(v);
         mPullToRefreshView.setRefreshing(true);
         setmRecyclerView(v);
+
+        Bundle arguments = getArguments();
+        String state = "";
+        if (arguments != null) {
+            state = arguments.getString("state");
+            if (state == null) {
+                state = "";
+            }
+        }
+
         searchBox = (SearchBox) getActivity().findViewById(R.id.search_box);
         searchBox.setSearchListener(new SearchBox.SearchListener() {
             @Override

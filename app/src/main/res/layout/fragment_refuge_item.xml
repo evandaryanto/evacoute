@@ -52,6 +52,20 @@
             android:layout_toRightOf="@id/refuge_item_image"
             android:id="@+id/refuge_item_contact"/>
 
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/location"
+            android:id="@+id/refuge_item_loc_img"/>
+
+        <TextView
+            android:layout_below="@id/refuge_item_loc_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="200 m"
+            android:id="@+id/refuge_item_loc_meter"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

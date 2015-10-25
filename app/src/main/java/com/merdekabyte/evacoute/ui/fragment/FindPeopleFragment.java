@@ -47,7 +47,7 @@ public class FindPeopleFragment extends Fragment {
         name.add("Harits Elfahmi");
         mAdapter = new PeopleAdapter(getActivity(), name);
         mRecyclerView.setAdapter(mAdapter);
-        searchBox = (SearchBox) getActivity().findViewById(R.id.search_box);
+        searchBox = (SearchBox) v.findViewById(R.id.search_box_people);
         searchBox.setSearchListener(new SearchBox.SearchListener() {
             @Override
             public void onSearchOpened() {
