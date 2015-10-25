@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.fragment.BiodataFragment;
+import com.merdekabyte.evacoute.ui.fragment.FindPeopleFragment;
 import com.merdekabyte.evacoute.ui.fragment.RefugeFragment;
 import com.parse.Parse;
 import com.quinny898.library.persistentsearch.SearchBox;
@@ -32,13 +33,8 @@ public class DrawerActivity extends AppCompatActivity
     SearchBox searchBox;
 
     protected void initializeParse() {
-        try{
-            Parse.enableLocalDatastore(this);
-            Parse.initialize(this, "AagLzvHfbym5hSVsfgtPIe2S4aVxIxuJrS1tLQcs", "VJD8wEvkodDkjGmXipwuPVcGrrwwcG5BFKK4EDPq");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "AagLzvHfbym5hSVsfgtPIe2S4aVxIxuJrS1tLQcs", "VJD8wEvkodDkjGmXipwuPVcGrrwwcG5BFKK4EDPq");
     }
 
     @Override
@@ -106,37 +102,6 @@ public class DrawerActivity extends AppCompatActivity
         else if (id == R.id.action_search) {
             searchBox = (SearchBox) findViewById(R.id.search_box);
             searchBox.revealFromMenuItem(R.id.search_box, this);
-            searchBox.setSearchListener(new SearchBox.SearchListener() {
-                @Override
-                public void onSearchOpened() {
-
-                }
-
-                @Override
-                public void onSearchCleared() {
-
-                }
-
-                @Override
-                public void onSearchClosed() {
-                    closeSearch();
-                }
-
-                @Override
-                public void onSearchTermChanged(String s) {
-
-                }
-
-                @Override
-                public void onSearch(String s) {
-
-                }
-
-                @Override
-                public void onResultClick(SearchResult searchResult) {
-
-                }
-            });
         }
 
         return super.onOptionsItemSelected(item);
@@ -169,7 +134,7 @@ public class DrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_information) {
             updateFragment(new BiodataFragment(), "Data Diri");
         } else if (id == R.id.nav_search) {
-
+            updateFragment(new FindPeopleFragment(), "Cari Pengungsi");
         } else if (id == R.id.nav_help_me) {
 
         }
@@ -192,7 +157,4 @@ public class DrawerActivity extends AppCompatActivity
         }
     }
 
-    protected void closeSearch() {
-        searchBox.hideCircularly(this);
-    }
 }

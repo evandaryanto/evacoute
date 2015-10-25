@@ -20,6 +20,7 @@ import com.merdekabyte.evacoute.ui.helper.CachedBitmapLoader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
     private Context mContext;
     private List<Refuge> mDataset;
+    private List<Refuge> mDatasetFull;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -53,6 +55,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public LocationAdapter(Context context, List<Refuge> myDataset) {
         mContext = context;
         mDataset = myDataset;
+        mDatasetFull = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
@@ -90,6 +93,16 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
                 mContext.startActivity(i);
             }
         });
+    }
+
+    public void filterDataSet(String query) {
+        List<Refuge> newDataset = new ArrayList<>();
+        for(Refuge location : mDatasetFull){
+            if (location.getName().toLowerCase().contains(query.toLowerCase()) || location.getDescription().toLowerCase().contains(query.toLowerCase())) {
+                newDataset.add(location);
+            }
+        }
+        mDataset = newDataset;
     }
 
     // Return the size of your dataset (invoked by the layout manager)
