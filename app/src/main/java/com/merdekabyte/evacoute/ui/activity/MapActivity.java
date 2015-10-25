@@ -54,6 +54,7 @@ public class MapActivity extends AppCompatActivity
     private Location mLastLocation;
     private GoogleMap mGoogleMap;
     private RefugeRepository refugeRepository;
+    private String cat = "All";
 
     // These settings are the same as the settings for the map. They will in fact give you updates
     // at the maximal rates currently possible.
@@ -77,6 +78,13 @@ public class MapActivity extends AppCompatActivity
         buildGoogleApiClient();
         refugeRepository = new RefugeRepository();
 
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            cat = "All";
+        }
+        else {
+            cat = extras.getString("Category");
+        }
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -115,9 +123,19 @@ public class MapActivity extends AppCompatActivity
             Log.e("ParseException", e.getMessage());
             e.printStackTrace();
         }
+        int i = 0;
         for (Refuge location : locations) {
-            map.addMarker(new MarkerOptions().position(new LatLng(location.getGeoLatitude(), location.getGeoLongitude())).title(location.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.markerhall)));
+            if (cat == "public")
+                map.addMarker(new MarkerOptions().position(new LatLng(location.getGeoLatitude(), location.getGeoLongitude())).title(location.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.markerhall)));
+            else if (cat == "nonpublic")
+                map.addMarker(new MarkerOptions().position(new LatLng(location.getGeoLatitude(), location.getGeoLongitude())).title(location.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.markerhome)));
+            else if (i%2 == 0)
+                map.addMarker(new MarkerOptions().position(new LatLng(location.getGeoLatitude(), location.getGeoLongitude())).title(location.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.markerhall)));
+            else
+                map.addMarker(new MarkerOptions().position(new LatLng(location.getGeoLatitude(), location.getGeoLongitude())).title(location.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.markerhome)));
+            i++;
         }
+
 
         CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(-6.8734974, 107.5844975));
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(5);

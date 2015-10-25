@@ -36,7 +36,7 @@ public class RefugeLocationActivity extends AppCompatActivity {
     ViewPager pager;
     RefugeLocationAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Informasi","Galeri","Daftar Pengungsi"};
+    CharSequence Titles[]={"Informasi","Galeri","Pengungsi"};
     int Numboftabs =3;
 
     @Override

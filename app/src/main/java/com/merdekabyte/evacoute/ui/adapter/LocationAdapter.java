@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Michinggun on 10/24/2015.
@@ -37,8 +38,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         // set the view's size, margins, paddings and layout parameters
-        public TextView name, location, contact;
-        public ImageView image;
+        public TextView name, location, contact, meter;
+        public ImageView image, imgLoc;
         public View layout;
 
         public ViewHolder(View v) {
@@ -48,6 +49,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             contact = (TextView) v.findViewById(R.id.refuge_item_contact);
             image = (ImageView) v.findViewById(R.id.refuge_item_image);
             layout = (RelativeLayout) v.findViewById(R.id.refuge_item_layout);
+            meter = (TextView) v.findViewById(R.id.refuge_item_loc_meter);
         }
     }
 
@@ -71,7 +73,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Refuge refuge = mDataset.get(position);
-
+        Random rand = new Random();
+        int  n = rand.nextInt(1000) + 1;
+        holder.meter.setText(n  + " m");
         try {
             holder.name.setText(refuge.getName());
             holder.location.setText(refuge.getLocation());
