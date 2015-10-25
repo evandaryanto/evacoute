@@ -11,7 +11,8 @@
             android:id="@+id/biodata_et_disease"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textLongMessage"
+            android:text="Rematik, Kejang-Kejang, Sesak Nafas, ISPA"
             android:hint="Penyakit Diderita"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -23,7 +24,8 @@
             android:id="@+id/biodata_et_extra"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Kebutuhan Khusus"/>
+            android:inputType="textLongMessage"
+            android:text="Kalo jalan kakinya sering melayang"
+            android:hint="Informasi Lain"/>
     </android.support.design.widget.TextInputLayout>
 </LinearLayout>

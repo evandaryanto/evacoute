@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refuge_item_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardMaxElevation="1dp"
+    card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:id="@+id/refuge_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="16dp"
+            android:src="@android:drawable/sym_def_app_icon"
+            android:id="@+id/refuge_item_image"
+            app:civ_border_width="0dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Bandung Digital Valley"
+            android:layout_toRightOf="@id/refuge_item_image"
+            android:id="@+id/refuge_item_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/refuge_item_name"
+            android:text="Sekeloa, Bandung"
+            android:layout_toRightOf="@id/refuge_item_image"
+            android:id="@+id/refuge_item_location"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="120dp"
+            android:padding="0dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@id/refuge_item_location"
+            android:text="Scan QRCode"
+            android:layout_toRightOf="@id/refuge_item_image"
+            android:id="@+id/refuge_item_volenteer_qrcode"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="60dp"
+            android:padding="0dp"
+            android:paddingLeft="10dp"
+            android:text="Edit"
+            android:layout_toRightOf="@id/refuge_item_volenteer_qrcode"
+            android:layout_below="@id/refuge_item_location"
+            android:id="@+id/refuge_item_volenteer_edit"/>
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

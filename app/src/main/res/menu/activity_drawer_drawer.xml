@@ -34,4 +34,13 @@
         </menu>
     </item>
 
+    <item android:title="Relawan" android:id="@+id/menu_volunteers">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/nav_manage_refege" android:icon="@drawable/findpeople"
+                    android:title="Managemen Pengungsian" />
+            </group>
+        </menu>
+    </item>
+
 </menu>

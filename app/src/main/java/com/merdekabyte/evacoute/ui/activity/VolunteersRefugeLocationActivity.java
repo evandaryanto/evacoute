@@ -18,6 +18,7 @@ import com.merdekabyte.evacoute.R;
 import com.merdekabyte.evacoute.ui.SlidingTabLayout;
 import com.merdekabyte.evacoute.ui.adapter.BiodataPagerAdapter;
 import com.merdekabyte.evacoute.ui.adapter.RefugeLocationAdapter;
+import com.merdekabyte.evacoute.ui.adapter.VolenteersLocationAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -29,14 +30,14 @@ import java.net.URL;
 /**
  * Created by Michinggun on 10/24/2015.
  */
-public class RefugeLocationActivity extends AppCompatActivity {
+public class VolunteersRefugeLocationActivity extends AppCompatActivity {
     private String name, location, contact, imageURL;
     private TextView tvName, tvLocation, tvContact;
     private ImageView tvImage;
     ViewPager pager;
     RefugeLocationAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Informasi","Galeri","Pengungsi"};
+    CharSequence Titles[]={"Informasi","Galeri","Daftar Pengungsi"};
     int Numboftabs =3;
 
     @Override

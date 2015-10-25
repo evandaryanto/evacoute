@@ -23,7 +23,7 @@
         android:layout_toRightOf="@id/drawer_header_pic"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold"
-        android:text="Alif Raditya Rochman"
+        android:text="Pandu Kartika Putra"
         android:id="@+id/drawer_header_name"/>
 
     <TextView
